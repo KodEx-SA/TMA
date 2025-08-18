@@ -52,7 +52,6 @@ setTimeout(() => {
 // Sign Up Button Click
 const signupBtn = document.querySelector('.btn-signup');
 signupBtn.addEventListener('click', function () {
-    alert('Sign up form will appear here!');
     // You can replace this with actual signup functionality
 });
 
