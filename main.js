@@ -73,7 +73,7 @@ const modelData = {
         height: '5\'9"',
         measurements: '32-24-34',
         shoeSize: '8',
-        hairEyes: 'Black/Brown'
+        herEyes: 'Black/Brown'
     },
     2: {
         name: 'Lerato Moloi',
@@ -81,7 +81,7 @@ const modelData = {
         height: '5\'7"',
         measurements: '34-26-36',
         shoeSize: '7',
-        hairEyes: 'Brown/Hazel'
+        herEyes: 'Brown/Hazel'
     },
     // Add more model data as needed
 };
