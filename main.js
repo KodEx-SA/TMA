@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const doorLeft = document.querySelector('.door-left');
     const doorRight = document.querySelector('.door-right');
     const heroSection = document.querySelector('.hero');
-
+    
     // Minimum loader display time (1.2 seconds)
     const minLoaderTime = 1200;
     const startTime = Date.now();
