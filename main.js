@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const doorLeft = document.querySelector('.door-left');
     const doorRight = document.querySelector('.door-right');
     const heroSection = document.querySelector('.hero');
-    
+
     // Minimum loader display time (1.2 seconds)
     const minLoaderTime = 1200;
     const startTime = Date.now();
@@ -82,7 +82,38 @@ const modelData = {
         shoeSize: '7',
         hairEyes: 'Brown/Hazel'
     },
-    // Add more model data as needed
+    3: {
+        name: 'Zinhle Khumalo',
+        bio: "Zinhle's bio information",
+        height: '5\'7"',
+        measurements: "Zinhle's measurements here",
+        shoeSize: "7",
+        hairEyes: "Brown/Hazel"
+    },
+    4: {
+        name: 'Nandi Mabaso',
+        bio: "Nandi's bio information",
+        height: '7\'8"',
+        measurements: "Nandi's measurements here",
+        shoeSize: "7",
+        hairEyes: "Brown/Hazel"
+    },
+    5: {
+        name: 'Thandiwe Nkosi',
+        bio: "Thandiwe's bio information",
+        height: '7\'8"',
+        measurements: "Thandiwe's measurements here",
+        shoeSize: "7",
+        hairEyes: "Brown/Hazel"
+    },
+    6: {
+        name: 'Nosipho Zwane',
+        bio: "Nosipho's bio information",
+        height: '6\'8"',
+        measurements: "Nosipho's measurements here",
+        shoeSize: "6",
+        hairEyes: "Brown/Hazel"
+    },
 };
 
 modelCards.forEach(card => {

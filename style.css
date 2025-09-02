@@ -262,7 +262,7 @@ h2 {
 .model-card img {
   width: 100%;
   height: 400px;
-  object-fit: cover;
+  object-fit: fill;
   transition: transform 0.3s ease;
 }
 
@@ -329,10 +329,11 @@ h2 {
   color: #333;
 }
 
+/* Pop up model content info */
 .modal-content img {
   width: 100%;
   max-height: 400px;
-  object-fit: cover;
+  object-fit: fill;
   border-radius: 5px;
   margin-bottom: 1.5rem;
 }
