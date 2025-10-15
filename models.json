@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Amahle Dlamini",
+        "bio": "Amahle is a versatile fashion and runway model with experience in international campaigns for top brands like Vogue and Chanel.",
+        "height": "5'9\"",
+        "measurements": "32-24-34",
+        "shoeSize": "8",
+        "hairEyes": "Black/Brown"
+    },
+    {
+        "id": 2,
+        "name": "Lerato Moloi",
+        "bio": "Lerato specializes in commercial and editorial modeling with a vibrant personality, featured in ads for local and global brands.",
+        "height": "5'7\"",
+        "measurements": "34-26-36",
+        "shoeSize": "7",
+        "hairEyes": "Brown/Hazel"
+    },
+    {
+        "id": 3,
+        "name": "Zinhle Khumalo",
+        "bio": "Zinhle excels in runway and fitness modeling, known for her athletic build and appearances in sports fashion shows.",
+        "height": "5'10\"",
+        "measurements": "33-25-35",
+        "shoeSize": "8.5",
+        "hairEyes": "Black/Dark Brown"
+    },
+    {
+        "id": 4,
+        "name": "Nandi Mabaso",
+        "bio": "Nandi is a commercial and print model with a focus on beauty campaigns, having worked with cosmetics brands like MAC.",
+        "height": "5'8\"",
+        "measurements": "34-26-36",
+        "shoeSize": "7.5",
+        "hairEyes": "Brown/Green"
+    },
+    {
+        "id": 5,
+        "name": "Thandiwe Nkosi",
+        "bio": "Thandiwe specializes in fashion and beauty, with international runway experience in Milan and Paris Fashion Weeks.",
+        "height": "5'11\"",
+        "measurements": "32-24-34",
+        "shoeSize": "9",
+        "hairEyes": "Black/Brown"
+    },
+    {
+        "id": 6,
+        "name": "Nosipho Zwane",
+        "bio": "Nosipho is an editorial and runway model, celebrated for her unique look in high-fashion editorials.",
+        "height": "5'9\"",
+        "measurements": "33-25-35",
+        "shoeSize": "8",
+        "hairEyes": "Brown/Hazel"
+    }
+]
