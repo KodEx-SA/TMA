@@ -19,10 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1200);
     }, Math.max(0, minLoaderTime - (Date.now() - startTime)));
 
-    // Dynamic Copyright Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Removed dynamic year since footer is static
 
-    // Form Validation
+    // Form Validation with Toast
     const signupForm = document.getElementById('signup-form');
     signupForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -31,18 +30,40 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
 
+        // Email regex validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!name || !email || !password || !confirmPassword) {
+            showToast('Please fill in all fields.');
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            showToast('Please enter a valid email address.');
+            return;
+        }
         if (password !== confirmPassword) {
-            alert('Passwords do not match!');
+            showToast('Passwords do not match!');
+            return;
+        }
+        if (password.length < 6) {
+            showToast('Password must be at least 6 characters.');
             return;
         }
 
-        if (name && email && password.length >= 6) {
-            alert('Sign up successful! Welcome to Taahirah Modelling Agency.');
-            signupForm.reset();
-            // Optionally redirect to another page
-            // window.location.href = '/dashboard';
-        } else {
-            alert('Please fill in all fields correctly. Password must be at least 6 characters.');
-        }
+        // Simulate successful signup (replace with backend fetch if available)
+        showToast('Sign up successful! Welcome to Taahirah Modelling Agency.');
+        signupForm.reset();
+        Optionally: window.location.href = '/index.html'; // Redirect to homepage
     });
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300); // Fade out time
+        }, 3000);
+    }
 });
