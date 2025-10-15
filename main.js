@@ -1,4 +1,3 @@
-
 'use strict'
 document.addEventListener('DOMContentLoaded', function () {
     const loaderContainer = document.querySelector('.loader-container');
@@ -31,8 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
 const masonryGrid = document.querySelector('.masonry-grid');
 let position = 0;
 const speed = 0.05; // Adjust speed here (lower = slower)
+let isAnimating = true;
 
 function animateMasonry() {
+    if (!isAnimating) return;
+    
     position -= speed;
 
     // Reset position when it goes too far
@@ -49,11 +51,24 @@ setTimeout(() => {
     animateMasonry();
 }, 3000);
 
+// Pause animation on hover (desktop only)
+// if (window.innerWidth > 768) {
+//     masonryGrid.addEventListener('mouseenter', () => {
+//         isAnimating = true;
+//     });
+
+//     masonryGrid.addEventListener('mouseleave', () => {
+//         isAnimating = true;
+//     });
+// }
+
 // Sign Up Button Click
 const signupBtn = document.querySelector('.btn-signup');
-signupBtn.addEventListener('click', function () {
-    // You can replace this with actual signup functionality
-});
+if (signupBtn) {
+    signupBtn.addEventListener('click', function () {
+        // You can replace this with actual signup functionality
+    });
+}
 
 // Modal opening and closing functionality for model information
 const modelCards = document.querySelectorAll('.model-card');
@@ -74,7 +89,6 @@ fetch('models.json')
             acc[model.id] = model;
             return acc;
         }, {});
-        // You can add a callback here if needed to refresh UI
     })
     .catch(error => console.error('Error loading models:', error));
 
@@ -91,33 +105,58 @@ modelCards.forEach(card => {
             modalStats[2].textContent = data.shoeSize;
             modalStats[3].textContent = data.hairEyes;
             modelModal.classList.add('active');
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
         }
     });
 });
 
-closeModalBtn.addEventListener('click', () => {
+function closeModal() {
     modelModal.classList.remove('active');
-});
+    document.body.style.overflow = 'auto';
+}
+
+closeModalBtn.addEventListener('click', closeModal);
 
 // Close modal when clicking outside content
 modelModal.addEventListener('click', (e) => {
     if (e.target === modelModal) {
-        modelModal.classList.remove('active');
+        closeModal();
     }
 });
 
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modelModal.classList.contains('active')) {
+        closeModal();
+    }
+});
 
+// Add intersection observer for animations
+const observerElements = document.querySelectorAll('.about-content, .models-container, .footer-container');
 
-// Add intersection observer for footer animation
-const footerContainer = document.querySelector('.footer-container');
-
-const footerObserver = new IntersectionObserver((entries) => {
+const contentObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            footerObserver.unobserve(entry.target);
+            contentObserver.unobserve(entry.target);
         }
     });
 }, { threshold: 0.1 });
 
-footerObserver.observe(footerContainer);
+observerElements.forEach(el => {
+    if (el) contentObserver.observe(el);
+});
+
+// Handle responsive behavior
+function handleResize() {
+    // Adjust speeds based on screen size
+    if (window.innerWidth < 768) {
+        // Disable hover pause on mobile
+        // isAnimating = false;
+    }
+}
+
+window.addEventListener('resize', handleResize);
+handleResize();
