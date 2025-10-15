@@ -65,56 +65,70 @@ const modalBio = document.querySelector('.modal-bio');
 const modalStats = document.querySelectorAll('.modal-stats p');
 
 // Sample model data (you can store this in a JSON file or API)
-const modelData = {
-    1: {
-        name: 'Amahle Dlamini',
-        bio: 'Amahle is a versatile fashion and runway model with experience in international campaigns.',
-        height: '5\'9"',
-        measurements: '32-24-34',
-        shoeSize: '8',
-        hairEyes: 'Black/Brown'
-    },
-    2: {
-        name: 'Lerato Moloi',
-        bio: 'Lerato specializes in commercial and editorial modeling with a vibrant personality.',
-        height: '5\'7"',
-        measurements: '34-26-36',
-        shoeSize: '7',
-        hairEyes: 'Brown/Hazel'
-    },
-    3: {
-        name: 'Zinhle Khumalo',
-        bio: "Zinhle's bio information",
-        height: '5\'7"',
-        measurements: "Zinhle's measurements here",
-        shoeSize: "7",
-        hairEyes: "Brown/Hazel"
-    },
-    4: {
-        name: 'Nandi Mabaso',
-        bio: "Nandi's bio information",
-        height: '7\'8"',
-        measurements: "Nandi's measurements here",
-        shoeSize: "7",
-        hairEyes: "Brown/Hazel"
-    },
-    5: {
-        name: 'Thandiwe Nkosi',
-        bio: "Thandiwe's bio information",
-        height: '7\'8"',
-        measurements: "Thandiwe's measurements here",
-        shoeSize: "7",
-        hairEyes: "Brown/Hazel"
-    },
-    6: {
-        name: 'Nosipho Zwane',
-        bio: "Nosipho's bio information",
-        height: '6\'8"',
-        measurements: "Nosipho's measurements here",
-        shoeSize: "6",
-        hairEyes: "Brown/Hazel"
-    },
-};
+// const modelData = {
+//     1: {
+//         name: 'Amahle Dlamini',
+//         bio: 'Amahle is a versatile fashion and runway model with experience in international campaigns.',
+//         height: '5\'9"',
+//         measurements: '32-24-34',
+//         shoeSize: '8',
+//         hairEyes: 'Black/Brown'
+//     },
+//     2: {
+//         name: 'Lerato Moloi',
+//         bio: 'Lerato specializes in commercial and editorial modeling with a vibrant personality.',
+//         height: '5\'7"',
+//         measurements: '34-26-36',
+//         shoeSize: '7',
+//         hairEyes: 'Brown/Hazel'
+//     },
+//     3: {
+//         name: 'Zinhle Khumalo',
+//         bio: "Zinhle's bio information",
+//         height: '5\'7"',
+//         measurements: "Zinhle's measurements here",
+//         shoeSize: "7",
+//         hairEyes: "Brown/Hazel"
+//     },
+//     4: {
+//         name: 'Nandi Mabaso',
+//         bio: "Nandi's bio information",
+//         height: '7\'8"',
+//         measurements: "Nandi's measurements here",
+//         shoeSize: "7",
+//         hairEyes: "Brown/Hazel"
+//     },
+//     5: {
+//         name: 'Thandiwe Nkosi',
+//         bio: "Thandiwe's bio information",
+//         height: '7\'8"',
+//         measurements: "Thandiwe's measurements here",
+//         shoeSize: "7",
+//         hairEyes: "Brown/Hazel"
+//     },
+//     6: {
+//         name: 'Nosipho Zwane',
+//         bio: "Nosipho's bio information",
+//         height: '6\'8"',
+//         measurements: "Nosipho's measurements here",
+//         shoeSize: "6",
+//         hairEyes: "Brown/Hazel"
+//     },
+// };
+
+let modelData = {};
+
+// Fetch model data from external JSON file
+fetch('models.json')
+    .then(response => response.json())
+    .then(data => {
+        modelData = data.reduce((acc, model) => {
+            acc[model.id] = model;
+            return acc;
+        }, {});
+        // You can add a callback here if needed to refresh UI
+    })
+    .catch(error => console.error('Error loading models:', error));
 
 modelCards.forEach(card => {
     card.addEventListener('click', () => {

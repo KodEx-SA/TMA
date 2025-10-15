@@ -134,87 +134,55 @@
             <div class="models-container visible">
                 <div class="models-grid">
                     <div class="model-card" data-model="1">
-                        <img src="img/1.png" alt="Model 1">
+                        <img src="img/1.png" alt="Amahle Dlamini fashion model" loading="lazy">
                         <div class="model-info">
                             <h3>Amahle Dlamini</h3>
                             <p>Fashion & Runway</p>
                         </div>
                     </div>
                     <div class="model-card" data-model="2">
-                        <img src="img/2.png" alt="Model 2">
+                        <img src="img/2.png" alt="Lerato Moloi editorial model" loading="lazy">
                         <div class="model-info">
                             <h3>Lerato Moloi</h3>
-                            <p>Commercial & Editorial</p>
+                            <p>Editorial & Commercial</p>
                         </div>
                     </div>
                     <div class="model-card" data-model="3">
-                        <img src="img/3.png" alt="Model 3">
+                        <img src="img/5.png" alt="Thandiwe Nkosi fashion model" loading="lazy">
                         <div class="model-info">
-                            <h3>Zinhle Khumalo</h3>
-                            <p>Runway & Fitness</p>
+                            <h3>Thandiwe Nkosi</h3>
+                            <p>Fashion & Runway</p>
                         </div>
                     </div>
                     <div class="model-card" data-model="4">
-                        <img src="img/4.png" alt="Model 4">
+                        <img src="img/6.png" alt="Nosipho Zwane runway model" loading="lazy">
                         <div class="model-info">
-                            <h3>Nandi Mabaso</h3>
-                            <p>Commercial & Print</p>
+                            <h3>Nosipho Zwane</h3>
+                            <p>Runway & Commercial</p>
                         </div>
                     </div>
                     <div class="model-card" data-model="5">
-                        <img src="img/5.png" alt="Model 5">
+                        <img src="img/3.png" alt="Zinhle Khumalo runway model" loading="lazy">
                         <div class="model-info">
-                            <h3>Thandiwe Nkosi</h3>
-                            <p>Fashion & Beauty</p>
+                            <h3>Zinhle Khumalo</h3>
+                            <p>Runway & Fashion</p>
                         </div>
                     </div>
                     <div class="model-card" data-model="6">
-                        <img src="img/6.png" alt="Model 6">
+                        <img src="img/4.png" alt="Nandi Mabaso commercial model" loading="lazy">
                         <div class="model-info">
-                            <h3>Nosipho Zwane</h3>
-                            <p>Runway & Editorial</p>
+                            <h3>Nandi Mabaso</h3>
+                            <p>Commercial & Editorial</p>
                         </div>
                     </div>
                 </div>
             </div>
         
-            <!-- Model Modal -->
+            <!-- Model Modal (only one instance) -->
             <div class="model-modal">
                 <div class="modal-content">
-                    <button class="close-modal">&times;</button>
-                    <img src="" alt="Model" class="modal-img">
-                    <div class="modal-info">
-                        <h3 class="modal-name">Model Name</h3>
-                        <p class="modal-bio">Model bio will appear here...</p>
-                        <div class="modal-stats">
-                            <div class="stat-item">
-                                <h4>Height</h4>
-                                <p class="stat-height">--</p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>Bust/Waist/Hips</h4>
-                                <p class="stat-measurements">--</p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>Shoe Size</h4>
-                                <p class="stat-shoes">--</p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>Hair/Eyes</h4>
-                                <p class="stat-hair-eyes">--</p>
-                            </div>
-                        </div>
-                        <p class="modal-experience">Experience details...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-            <!-- Model Modal -->
-            <div class="model-modal">
-                <div class="modal-content">
-                    <button class="close-modal">&times;</button>
-                    <img src alt="Model" class="modal-img">
+                    <button class="close-modal" aria-label="Close model details">&times;</button>
+                    <img src="" alt="Selected model" class="modal-img" loading="lazy">
                     <div class="modal-info">
                         <h3 class="modal-name">Model Name</h3>
                         <p class="modal-bio">Model bio will appear here...</p>
@@ -260,14 +228,11 @@
 
                 <div class="footer-links">
                     <h3>Quick Links</h3>
-                    <a href="#"><i class="fas fa-chevron-right"></i> Home</a>
-                    <a href="#"><i class="fas fa-chevron-right"></i> About
-                        Us</a>
-                    <a href="#"><i class="fas fa-chevron-right"></i> Our
-                        Models</a>
-                    <a href="#"><i class="fas fa-chevron-right"></i>
-                        Portfolio</a>
-                    <a href="#"><i class="fas fa-chevron-right"></i> Contact</a>
+                    <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+                    <a href="#about"><i class="fas fa-chevron-right"></i> About Us</a> <!-- Use anchor or create about.html -->
+                    <a href="#models"><i class="fas fa-chevron-right"></i> Our Models</a>
+                    <a href="#portfolio"><i class="fas fa-chevron-right"></i> Portfolio</a> <!-- Add portfolio section if needed -->
+                    <a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a> <!-- Add contact section -->
 
                     <div class="footer-social">
                         <h3>Follow Us</h3>
@@ -281,11 +246,6 @@
                 </div>
 
                 <div class="footer-map">
-                    <!-- <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.041620018107!2d28.05312831502904!3d-26.19998398344151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c1a6c0b8b5f%3A0x4e84c4a7d8e91e5e!2sSandton%20City!5e0!3m2!1sen!2sza!4v1620000000000!5m2!1sen!2sza"
-                    allowfullscreen="" loading="lazy"></iframe> -->
-
-                    <!-- Mafikeng location embedded map -->
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.041620018107!2d25.57738331502904!3d-25.85298398344151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMafikeng%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1630000000000!5m2!1sen!2sza"
                         allowfullscreen loading="lazy"></iframe>
