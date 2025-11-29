@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Log in to Taahirah Modelling Agency to access your modeling profile and career opportunities.">
+    <meta name="keywords" content="modeling agency, login, South Africa, fashion, Taahirah Zungu">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js" defer></script>
+    <title>TMA - Login</title>
+</head>
+
+<body>
+    <!-- Loader Section -->
+    <div class="loader-container">
+        <div class="loader-logo">FASHION</div>
+        <div class="door door-left"></div>
+        <div class="door door-right"></div>
+    </div>
+
+    <!-- Login Section -->
+    <section class="login">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-user-circle"></i>
+                <h2>Welcome Back</h2>
+                <p class="login-subtitle">Log in to access your modeling profile</p>
+            </div>
+
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email Address
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">Log In</button>
+            </form>
+
+            <div class="login-divider">
+                <span>OR</span>
+            </div>
+
+            <div class="social-login">
+                <button class="btn-social btn-google">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <button class="btn-social btn-facebook">
+                    <i class="fab fa-facebook-f"></i> Continue with Facebook
+                </button>
+            </div>
+
+            <p class="login-signup">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </p>
+
+            <a href="index.html" class="back-home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </section>
+
+</body>
+
+</html>

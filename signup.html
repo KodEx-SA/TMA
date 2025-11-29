@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sign up for Taahirah Modelling Agency, South Africa's premier modeling platform, to launch your career in fashion, runway, and commercial modeling.">
+    <meta name="description"
+        content="Sign up for Taahirah Modelling Agency, South Africa's premier modeling platform, to launch your career in fashion, runway, and commercial modeling.">
     <meta name="keywords" content="modeling agency, sign up, South Africa, fashion, Taahirah Zungu">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="signup.css">
     <script src="signup.js" defer></script>
     <title>TMA - Sign Up</title>
 </head>
+
 <body>
     <!-- Loader Section -->
     <div class="loader-container">
@@ -21,30 +24,99 @@
     <!-- Signup Section -->
     <section class="signup">
         <div class="signup-container">
-            <h2>Join Taahirah Modelling Agency</h2>
-            <p class="signup-subtitle">Start your journey to a successful modeling career with us.</p>
+            <div class="signup-header">
+                <i class="fas fa-user-plus"></i>
+                <h2>Join Taahirah Modelling Agency</h2>
+                <p class="signup-subtitle">Start your journey to a successful modeling career with us.</p>
+            </div>
+
             <form id="signup-form" class="signup-form">
                 <div class="form-group">
-                    <label for="name">Full Name</label>
+                    <label for="name">
+                        <i class="fas fa-user"></i> Full Name
+                    </label>
                     <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email Address
+                    </label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    <label for="phone">
+                        <i class="fas fa-phone"></i> Phone Number
+                    </label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" placeholder="Create a password" required>
+                        <button type="button" class="toggle-password" data-target="password"
+                            aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar"></div>
+                        <span class="strength-text"></span>
+                    </div>
                 </div>
-                <button type="submit" class="btn-signup">Sign Up</button>
+
+                <div class="form-group">
+                    <label for="confirm-password">
+                        <i class="fas fa-check-circle"></i> Confirm Password
+                    </label>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" name="confirm-password"
+                            placeholder="Confirm your password" required>
+                        <button type="button" class="toggle-password" data-target="confirm-password"
+                            aria-label="Toggle confirm password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span>I agree to the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#"
+                                class="terms-link">Privacy Policy</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-signup">Create Account</button>
             </form>
-            <p class="signup-login">Already have an account? <a href="login.html">Log In</a></p>
+
+            <div class="signup-divider">
+                <span>OR</span>
+            </div>
+
+            <div class="social-signup">
+                <button class="btn-social btn-google">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
+                <button class="btn-social btn-facebook">
+                    <i class="fab fa-facebook-f"></i> Sign up with Facebook
+                </button>
+            </div>
+
+            <p class="signup-login">
+                Already have an account? <a href="login.html">Log In</a>
+            </p>
+
+            <a href="index.html" class="back-home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
         </div>
     </section>
-    
+
 </body>
+
 </html>
