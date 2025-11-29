@@ -34,7 +34,7 @@ let isAnimating = true;
 
 function animateMasonry() {
     if (!isAnimating) return;
-    
+
     position -= speed;
 
     // Reset position when it goes too far
@@ -52,21 +52,13 @@ setTimeout(() => {
 }, 3000);
 
 // Pause animation on hover (desktop only)
-// if (window.innerWidth > 768) {
-//     masonryGrid.addEventListener('mouseenter', () => {
-//         isAnimating = true;
-//     });
+if (window.innerWidth > 768) {
+    masonryGrid.addEventListener('mouseenter', () => {
+        isAnimating = false;
+    });
 
-//     masonryGrid.addEventListener('mouseleave', () => {
-//         isAnimating = true;
-//     });
-// }
-
-// Sign Up Button Click
-const signupBtn = document.querySelector('.btn-signup');
-if (signupBtn) {
-    signupBtn.addEventListener('click', function () {
-        // You can replace this with actual signup functionality
+    masonryGrid.addEventListener('mouseleave', () => {
+        isAnimating = true;
     });
 }
 
@@ -77,37 +69,51 @@ const closeModalBtn = document.querySelector('.close-modal');
 const modalImg = document.querySelector('.modal-img');
 const modalName = document.querySelector('.modal-name');
 const modalBio = document.querySelector('.modal-bio');
-const modalStats = document.querySelectorAll('.modal-stats p');
 
 let modelData = {};
 
 // Fetch model data from external JSON file
 fetch('models.json')
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to load models data');
+        }
+        return response.json();
+    })
     .then(data => {
         modelData = data.reduce((acc, model) => {
             acc[model.id] = model;
             return acc;
         }, {});
     })
-    .catch(error => console.error('Error loading models:', error));
+    .catch(error => {
+        console.error('Error loading models:', error);
+        showToast('Failed to load model information. Please refresh the page.');
+    });
 
 modelCards.forEach(card => {
     card.addEventListener('click', () => {
-        const modelId = card.dataset.model;
+        const modelId = parseInt(card.dataset.model);
         const data = modelData[modelId];
+
         if (data) {
             modalImg.src = card.querySelector('img').src;
+            modalImg.alt = `${data.name} profile photo`;
             modalName.textContent = data.name;
             modalBio.textContent = data.bio;
-            modalStats[0].textContent = data.height;
-            modalStats[1].textContent = data.measurements;
-            modalStats[2].textContent = data.shoeSize;
-            modalStats[3].textContent = data.hairEyes;
+
+            // Fixed: Use correct selectors for stat items
+            document.querySelector('.stat-height').textContent = data.height;
+            document.querySelector('.stat-measurements').textContent = data.measurements;
+            document.querySelector('.stat-shoes').textContent = data.shoeSize;
+            document.querySelector('.stat-hair-eyes').textContent = data.hairEyes;
+
             modelModal.classList.add('active');
-            
+
             // Prevent body scroll when modal is open
             document.body.style.overflow = 'hidden';
+        } else {
+            showToast('Model information not available.');
         }
     });
 });
@@ -133,6 +139,23 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Toast notification function
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Trigger reflow to enable transition
+    toast.offsetHeight;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
 // Add intersection observer for animations
 const observerElements = document.querySelectorAll('.about-content, .models-container, .footer-container');
 
@@ -151,11 +174,22 @@ observerElements.forEach(el => {
 
 // Handle responsive behavior
 function handleResize() {
-    // Adjust speeds based on screen size
-    if (window.innerWidth < 768) {
-        // Disable hover pause on mobile
-        // isAnimating = false;
+    // Re-enable hover pause when resizing to desktop
+    if (window.innerWidth > 768) {
+        masonryGrid.removeEventListener('mouseenter', pauseAnimation);
+        masonryGrid.removeEventListener('mouseleave', resumeAnimation);
+        masonryGrid.addEventListener('mouseenter', pauseAnimation);
+        masonryGrid.addEventListener('mouseleave', resumeAnimation);
     }
+}
+
+function pauseAnimation() {
+    isAnimating = false;
+}
+
+function resumeAnimation() {
+    isAnimating = true;
+    animateMasonry();
 }
 
 window.addEventListener('resize', handleResize);

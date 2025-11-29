@@ -76,8 +76,8 @@ section {
   transform: perspective(1000px) rotateY(110deg);
 }
 
-/* Signup Section */
-.signup {
+/* Login Section */
+.login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,8 +85,8 @@ section {
   padding: 2rem;
 }
 
-.signup-container {
-  max-width: 500px;
+.login-container {
+  max-width: 450px;
   width: 100%;
   background: white;
   padding: 2.5rem;
@@ -95,38 +95,37 @@ section {
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.8s ease;
-  margin: 2rem auto;
 }
 
-.signup-container.visible {
+.login-container.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.signup-header {
+.login-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.signup-header i {
+.login-header i {
   font-size: 4rem;
   color: #667eea;
   margin-bottom: 1rem;
 }
 
-.signup h2 {
+.login h2 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   color: #333;
 }
 
-.signup-subtitle {
+.login-subtitle {
   font-size: 1rem;
   color: #666;
   margin-bottom: 0;
 }
 
-.signup-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -192,88 +191,47 @@ section {
   color: #667eea;
 }
 
-.password-strength {
-  margin-top: 0.5rem;
-  display: none;
-}
-
-.password-strength.visible {
-  display: block;
-}
-
-.strength-bar {
-  height: 4px;
-  background: #e0e0e0;
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 0.3rem;
-}
-
-.strength-bar::before {
-  content: "";
-  display: block;
-  height: 100%;
-  width: 0;
-  transition: width 0.3s ease, background-color 0.3s ease;
-}
-
-.strength-bar.weak::before {
-  width: 33%;
-  background-color: #667eea;
-}
-
-.strength-bar.medium::before {
-  width: 66%;
-  background-color: #ffa500;
-}
-
-.strength-bar.strong::before {
-  width: 100%;
-  background-color: #51cf66;
-}
-
-.strength-text {
-  font-size: 0.85rem;
-  color: #666;
-}
-
-.checkbox-group {
-  margin-top: -0.5rem;
-}
-
-.checkbox-label {
+.form-options {
   display: flex;
-  align-items: flex-start;
-  gap: 0.7rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   cursor: pointer;
   font-size: 0.9rem;
   color: #666;
-  font-weight: 400;
 }
 
-.checkbox-label input[type="checkbox"] {
+.remember-me input[type="checkbox"] {
   width: auto;
-  min-width: 18px;
-  height: 18px;
-  margin-top: 0.2rem;
   cursor: pointer;
   accent-color: #667eea;
 }
 
-.terms-link {
+.forgot-password {
   color: #667eea;
   text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.terms-link:hover {
+.forgot-password:hover {
+  color: #764ba2;
   text-decoration: underline;
 }
 
-.btn-signup {
+.btn-login {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #6b82f5 0%, #667eea 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
   border-radius: 10px;
@@ -281,31 +239,31 @@ section {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(87, 121, 245, 0.4);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-.btn-signup:hover {
+.btn-login:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(87, 127, 245, 0.6);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
-.btn-signup:active {
+.btn-login:active {
   transform: translateY(0);
 }
 
-.btn-signup:disabled {
+.btn-login:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.signup-divider {
+.login-divider {
   text-align: center;
   margin: 1.5rem 0;
   position: relative;
 }
 
-.signup-divider::before,
-.signup-divider::after {
+.login-divider::before,
+.login-divider::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -314,22 +272,22 @@ section {
   background: #e0e0e0;
 }
 
-.signup-divider::before {
+.login-divider::before {
   left: 0;
 }
 
-.signup-divider::after {
+.login-divider::after {
   right: 0;
 }
 
-.signup-divider span {
+.login-divider span {
   background: white;
   padding: 0 1rem;
   color: #999;
   font-size: 0.9rem;
 }
 
-.social-signup {
+.social-login {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -375,22 +333,22 @@ section {
   background: #f0f4ff;
 }
 
-.signup-login {
+.login-signup {
   text-align: center;
   font-size: 0.95rem;
   color: #666;
   margin-bottom: 1rem;
 }
 
-.signup-login a {
+.login-signup a {
   color: #667eea;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
-.signup-login a:hover {
-  color: #f093fb;
+.login-signup a:hover {
+  color: #764ba2;
   text-decoration: underline;
 }
 
@@ -427,7 +385,7 @@ section {
 }
 
 .toast-error {
-  background-color: #667eea;
+  background-color: #ff6b6b;
 }
 
 .toast-success {
@@ -445,15 +403,15 @@ section {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  .signup h2 {
+  .login h2 {
     font-size: 1.75rem;
   }
 
-  .signup-container {
+  .login-container {
     padding: 2rem;
   }
 
-  .signup-header i {
+  .login-header i {
     font-size: 3.5rem;
   }
 }
@@ -463,24 +421,24 @@ section {
     padding: 1rem;
   }
 
-  .signup h2 {
+  .login h2 {
     font-size: 1.5rem;
   }
 
-  .signup-container {
+  .login-container {
     padding: 1.5rem;
     border-radius: 15px;
   }
 
-  .signup-header i {
+  .login-header i {
     font-size: 3rem;
   }
 
-  .signup-subtitle {
+  .login-subtitle {
     font-size: 0.9rem;
   }
 
-  .btn-signup {
+  .btn-login {
     font-size: 1rem;
     padding: 0.9rem;
   }
@@ -490,8 +448,10 @@ section {
     padding: 0.8rem;
   }
 
-  .checkbox-label {
-    font-size: 0.85rem;
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
   }
 
   .toast {
