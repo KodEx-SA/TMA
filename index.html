@@ -1,263 +1,437 @@
+<!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Taahirah Modelling Agency: South Africa's premier modeling management company, empowering diverse talent in fashion, runway, and commercial sectors. Start your modeling career today.">
-        <meta name="keywords" content="modeling agency, home, South Africa, fashion, Taahirah Zungu">
-        <title>TMA - Taahirah Modelling Agency</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
-        <script src="main.js" defer></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Taahirah Modelling Agency - South Africa's premier modeling agency offering model management, training programs, kids fitness, and pageant preparation.">
+    <title>TMA - Taahirah Modelling Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
-
-        <!-- Loader Section -->
-        <div class="loader-container">
-            <div class="loader-logo">FASHION</div>
-            <div class="door door-left"></div>
-            <div class="door door-right"></div>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">TMA</a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#programmes">Programmes</a></li>
+                <li><a href="#model-management">Model Management</a></li>
+                <li><a href="#kids-gym">Kids Fitness</a></li>
+                <li><a href="#ambassador">TMA Ambassador NW</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#partnerships">Partnerships</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <!-- Hero Section -->
-        <section class="hero">
-            <!-- Masonry Grid Background -->
-            <div class="masonry-grid">
-                <div class="masonry-item item1">
-                    <img src="img/1.png" alt="Amahle Dlamini in fashion pose" loading="lazy">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Welcome To The Future Of Your Modelling Career</h1>
+            <p>South Africa's Premier Modelling Agency</p>
+            <a href="#model-management" class="btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Who We Are</h3>
+                    <p>Taahirah Modelling Agency (TMA) is South Africa's premier modelling management company, founded
+                        in 2015 by Taahirah Zungu. We celebrate African beauty and talent on the global stage.</p>
                 </div>
-                <div class="masonry-item item2">
-                    <img src="img/12.png" alt="Lerato Moloi editorial shot" loading="lazy">
+
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Our Story</h3>
+                    <p>What started as a small local agency has grown into a leading force in South Africa's fashion
+                        industry, representing diverse talent across fashion, commercial, and runway sectors.</p>
                 </div>
-                <div class="masonry-item item3">
-                    <img src="img/9.png" alt="Lerato Moloi editorial shot" loading="lazy">
-                </div>
-                <div class="masonry-item item4">
-                    <img src="img/25.png" alt="Lerato Moloi editorial shot" loading="lazy">
-                </div>
-                <div class="masonry-item item5">
-                    <img src="img/22.png" alt="Thandiwe Nkosi in fashion pose" loading="lazy">
-                </div>
-                <div class="masonry-item item6">
-                    <img src="img/23.png" alt="Nosipho Zwane runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item7">
-                    <img src="img/4.png" alt="Zinhle Khumalo runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item8">
-                    <img src="img/11.png" alt="Nandi Mabaso commercial shot" loading="lazy">
-                </div>
-                <div class="masonry-item item9">
-                    <img src="img/16.png" alt="Zinhle Khumalo runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item10">
-                    <img src="img/20.png" alt="Nandi Mabaso commercial shot" loading="lazy">
-                </div>
-                <div class="masonry-item item11">
-                    <img src="img/15.png" alt="Zinhle Khumalo runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item12">
-                    <img src="img/17.png" alt="Thandiwe Nkosi in fashion pose" loading="lazy">
-                </div>
-                <div class="masonry-item item13">
-                    <img src="img/28.png" alt="Thandiwe Nkosi in fashion pose" loading="lazy">
-                </div>
-                <div class="masonry-item item14">
-                    <img src="img/10.png" alt="Nosipho Zwane runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item15">
-                    <img src="img/3.png" alt="Nosipho Zwane runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item16">
-                    <img src="img/8.png" alt="Amahle Dlamini in fashion pose" loading="lazy">
-                </div>
-                <div class="masonry-item item17">
-                    <img src="img/5.png" alt="Lerato Moloi editorial shot" loading="lazy">
-                </div>
-                <div class="masonry-item item18">
-                    <img src="img/29.png" alt="Nandi Mabaso commercial shot" loading="lazy">
-                </div>
-                <div class="masonry-item item19">
-                    <img src="img/24.png" alt="Zinhle Khumalo runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item20">
-                    <img src="img/9.png" alt="Nosipho Zwane runway shot" loading="lazy">
-                </div>
-                <div class="masonry-item item21">
-                    <img src="img/2.png" alt="Amahle Dlamini in fashion pose" loading="lazy">
-                </div>
-                <div class="masonry-item item22">
-                    <img src="img/7.png" alt="Lerato Moloi editorial shot" loading="lazy">
-                </div>
-                <div class="masonry-item item23">
-                    <img src="img/30.png" alt="Thandiwe Nkosi in fashion pose" loading="lazy">
-                </div>
-                <div class="masonry-item item24">
-                    <img src="img/26.png" alt="Model 24 in commercial pose" loading="lazy">
+
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Achievements</h3>
+                    <p>Over 500+ models trained, 50+ fashion shows organized, partnerships with major brands, and
+                        recognition as one of North West's leading agencies.</p>
                 </div>
             </div>
 
-            <!-- Hero Content -->
-            <div class="hero-content">
-                <h2>Welcome To The Future Of Your Modelling Career.</h2>
-                <a href="signup.html" class="btn-signup" target="_blank">SIGN UP</a>
-            </div>
-        </section>
-        <!-- About Section -->
-        <section class="about">
-            <h2>About Us</h2>
-            <div class="about-content visible">
-                <div class="ceo-graphic">
-                    <img src="img/T3.jpg" alt="CEO Taahirah Zungu" loading="lazy">
-                </div>
-                <div class="about-text">
-                    <p>Taahirah Modelling Agency (TMA) was founded in 2015 by
-                        Taahirah Zungu with a vision to create a
-                        platform that celebrates African beauty and talent on
-                        the global stage.</p>
-                    <p>What started as a small local agency has grown into South
-                        Africa's premier modelling management
-                        company, representing diverse talent across fashion,
-                        commercial, and runway sectors.</p>
-                    <p>Our mission is to empower models through professional
-                        development, ethical representation, and
-                        opportunities that showcase their unique beauty and
-                        personality.</p>
+            <div class="ceo-section">
+                <img src="img/T3.jpg" alt="CEO Taahirah Zungu">
+                <div class="ceo-text">
+                    <h3>Meet Our Founder</h3>
+                    <h4>Taahirah Zungu</h4>
+                    <p>With over a decade of experience in the fashion industry, Taahirah has dedicated her career to
+                        empowering models through professional development, ethical representation, and opportunities
+                        that showcase their unique beauty and personality.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Models Section -->
-        <section class="models">
-            <h2>Our Models</h2>
-            <div class="models-container visible">
-                <div class="models-grid">
-                    <div class="model-card" data-model="1">
-                        <img src="img/1.png" alt="Amahle Dlamini fashion model" loading="lazy">
-                        <div class="model-info">
-                            <h3>Amahle Dlamini</h3>
-                            <p>Fashion & Runway</p>
-                        </div>
+    <!-- Programmes Section -->
+    <section id="programmes" class="programmes-section">
+        <div class="container">
+            <h2 class="section-title">Programmes & Training</h2>
+
+            <div class="programmes-grid">
+                <div class="programme-card">
+                    <img src="img/programme-modeling.jpg" alt="Modelling Courses" onerror="this.src='img/1.png'">
+                    <div class="programme-content">
+                        <h3>Modelling Courses</h3>
+                        <p>Professional runway training, photo shoot techniques, and portfolio development.</p>
+                        <a href="#application" class="btn-secondary">Learn More</a>
                     </div>
-                    <div class="model-card" data-model="2">
-                        <img src="img/2.png" alt="Lerato Moloi editorial model" loading="lazy">
-                        <div class="model-info">
-                            <h3>Lerato Moloi</h3>
-                            <p>Editorial & Commercial</p>
-                        </div>
+                </div>
+
+                <div class="programme-card">
+                    <img src="img/programme-development.jpg" alt="Personal Development" onerror="this.src='img/2.png'">
+                    <div class="programme-content">
+                        <h3>Personal Development</h3>
+                        <p>Build confidence, communication skills, and professional etiquette.</p>
+                        <a href="#application" class="btn-secondary">Learn More</a>
                     </div>
-                    <div class="model-card" data-model="3">
-                        <img src="img/5.png" alt="Thandiwe Nkosi fashion model" loading="lazy">
-                        <div class="model-info">
-                            <h3>Thandiwe Nkosi</h3>
-                            <p>Fashion & Runway</p>
-                        </div>
+                </div>
+
+                <div class="programme-card">
+                    <img src="img/programme-pageant.jpg" alt="Pageant Training" onerror="this.src='img/5.png'">
+                    <div class="programme-content">
+                        <h3>Pageant Training</h3>
+                        <p>Comprehensive preparation for beauty pageants and competitions.</p>
+                        <a href="#application" class="btn-secondary">Learn More</a>
                     </div>
-                    <div class="model-card" data-model="4">
-                        <img src="img/6.png" alt="Nosipho Zwane runway model" loading="lazy">
-                        <div class="model-info">
-                            <h3>Nosipho Zwane</h3>
-                            <p>Runway & Commercial</p>
-                        </div>
-                    </div>
-                    <div class="model-card" data-model="5">
-                        <img src="img/3.png" alt="Zinhle Khumalo runway model" loading="lazy">
-                        <div class="model-info">
-                            <h3>Zinhle Khumalo</h3>
-                            <p>Runway & Fashion</p>
-                        </div>
-                    </div>
-                    <div class="model-card" data-model="6">
-                        <img src="img/4.png" alt="Nandi Mabaso commercial model" loading="lazy">
-                        <div class="model-info">
-                            <h3>Nandi Mabaso</h3>
-                            <p>Commercial & Editorial</p>
-                        </div>
+                </div>
+
+                <div class="programme-card">
+                    <img src="img/programme-kids.jpg" alt="Kids & Teen Programmes" onerror="this.src='img/3.png'">
+                    <div class="programme-content">
+                        <h3>Kids & Teen Programmes</h3>
+                        <p>Age-appropriate training for young aspiring models aged 8-17.</p>
+                        <a href="#application" class="btn-secondary">Learn More</a>
                     </div>
                 </div>
             </div>
-        
-            <!-- Model Modal (only one instance) -->
-            <div class="model-modal">
-                <div class="modal-content">
-                    <button class="close-modal" aria-label="Close model details">&times;</button>
-                    <img src="" alt="Selected model" class="modal-img" loading="lazy">
-                    <div class="modal-info">
-                        <h3 class="modal-name">Model Name</h3>
-                        <p class="modal-bio">Model bio will appear here...</p>
-                        <div class="modal-stats">
-                            <div class="stat-item">
-                                <h4>Height</h4>
-                                <p class="stat-height">--</p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>Bust/Waist/Hips</h4>
-                                <p class="stat-measurements">--</p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>Shoe Size</h4>
-                                <p class="stat-shoes">--</p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>Hair/Eyes</h4>
-                                <p class="stat-hair-eyes">--</p>
-                            </div>
-                        </div>
-                        <p class="modal-experience">Experience details...</p>
+
+            <div class="application-cta">
+                <h3>Ready to Start Your Journey?</h3>
+                <a href="signup.html" class="btn-primary">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Management Section -->
+    <section id="model-management" class="model-management-section">
+        <div class="container">
+            <h2 class="section-title">Model Management</h2>
+
+            <div class="management-intro">
+                <p>Join South Africa's most dynamic modelling agency. We provide comprehensive management services for
+                    aspiring and professional models.</p>
+            </div>
+
+            <div class="talent-categories">
+                <h3>Talent Categories</h3>
+                <div class="categories-grid">
+                    <div class="category-item">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Fashion Models</h4>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-camera"></i>
+                        <h4>Commercial Models</h4>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-walking"></i>
+                        <h4>Runway Models</h4>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-video"></i>
+                        <h4>Editorial Models</h4>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-child"></i>
+                        <h4>Child Models</h4>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-star"></i>
+                        <h4>Plus Size Models</h4>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Footer Section -->
-        <footer>
-            <div class="footer-container visible">
-                <div class="footer-info">
-                    <h3>Taahirah Modelling Agency</h3>
-                    <p>123 Fashion Avenue<br>
-                        Mafikeng, North West<br>
-                        South Africa, 2196</p>
+            <div class="action-buttons">
+                <a href="signup.html" class="btn-primary">Become a Model</a>
+                <a href="#contact" class="btn-secondary">Book a Model</a>
+            </div>
+        </div>
+    </section>
 
-                    <div class="footer-contact">
-                        <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
-                        <p><i class="fas fa-envelope"></i> info@tma.co.za</p>
-                        <p><i class="fas fa-clock"></i> Mon-Fri: 9AM - 5PM</p>
+    <!-- Kids Fitness Gym Section -->
+    <section id="kids-gym" class="kids-gym-section">
+        <div class="container">
+            <h2 class="section-title">TMA Kids Fitness Gym</h2>
+
+            <div class="gym-intro">
+                <img src="img/gym-kids.jpg" alt="Kids Fitness Gym" onerror="this.src='img/4.png'">
+                <div class="gym-text">
+                    <h3>Building Healthy, Confident Children</h3>
+                    <p>Our specialized kids fitness program combines fun activities with structured training to develop
+                        strength, coordination, and healthy habits from an early age.</p>
+                </div>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-heart"></i>
+                    <h4>Physical Health</h4>
+                    <p>Age-appropriate exercises for strength and flexibility</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-brain"></i>
+                    <h4>Mental Wellness</h4>
+                    <p>Build confidence and discipline</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Social Skills</h4>
+                    <p>Team activities and group classes</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-dumbbell"></i>
+                    <h4>Fun Workouts</h4>
+                    <p>Engaging, game-based fitness programs</p>
+                </div>
+            </div>
+
+            <div class="programs-list">
+                <h3>Our Programs</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> Little Stars (Ages 5-7)</li>
+                    <li><i class="fas fa-check"></i> Junior Athletes (Ages 8-12)</li>
+                    <li><i class="fas fa-check"></i> Teen Fitness (Ages 13-17)</li>
+                    <li><i class="fas fa-check"></i> Family Fitness Sessions</li>
+                </ul>
+            </div>
+
+            <a href="signup.html" class="btn-primary">Enroll Your Child</a>
+        </div>
+    </section>
+
+    <!-- TMA Ambassador NW Section -->
+    <section id="ambassador" class="ambassador-section">
+        <div class="container">
+            <h2 class="section-title">TMA Ambassador NW</h2>
+
+            <div class="ambassador-intro">
+                <p>Our prestigious ambassador program recognizes outstanding individuals who embody the values and
+                    excellence of TMA.</p>
+            </div>
+
+            <div class="winners-section">
+                <h3>Current Winner</h3>
+                <div class="winner-card featured">
+                    <img src="img/ambassador-current.jpg" alt="Current Ambassador" onerror="this.src='img/1.png'">
+                    <h4>Name TBA</h4>
+                    <p class="year">2024</p>
+                </div>
+            </div>
+
+            <div class="past-winners">
+                <h3>Past Winners</h3>
+                <div class="winners-grid">
+                    <div class="winner-card">
+                        <img src="img/winner1.jpg" alt="2023 Winner" onerror="this.src='img/2.png'">
+                        <h4>Winner 2023</h4>
+                    </div>
+                    <div class="winner-card">
+                        <img src="img/winner2.jpg" alt="2022 Winner" onerror="this.src='img/5.png'">
+                        <h4>Winner 2022</h4>
+                    </div>
+                    <div class="winner-card">
+                        <img src="img/winner3.jpg" alt="2021 Winner" onerror="this.src='img/3.png'">
+                        <h4>Winner 2021</h4>
+                    </div>
+                </div>
+            </div>
+
+            <a href="signup.html" class="btn-primary">Apply for 2025</a>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="shop-section">
+        <div class="container">
+            <h2 class="section-title">Shop</h2>
+
+            <div class="shop-grid">
+                <div class="shop-category">
+                    <img src="img/shop-clothing.jpg" alt="TMA Clothing" onerror="this.src='img/6.png'">
+                    <div class="shop-content">
+                        <h3>TMA Clothing</h3>
+                        <p>Exclusive branded apparel and accessories</p>
+                        <a href="#contact" class="btn-secondary">Shop Now</a>
                     </div>
                 </div>
 
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
-                    <a href="#about"><i class="fas fa-chevron-right"></i> About Us</a> <!-- Use anchor or create about.html -->
-                    <a href="#models"><i class="fas fa-chevron-right"></i> Our Models</a>
-                    <a href="#portfolio"><i class="fas fa-chevron-right"></i> Portfolio</a> <!-- Add portfolio section if needed -->
-                    <a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a> <!-- Add contact section -->
+                <div class="shop-category">
+                    <img src="img/shop-kit.jpg" alt="Model Starter Kit" onerror="this.src='img/4.png'">
+                    <div class="shop-content">
+                        <h3>Model Starter Kit</h3>
+                        <p>Everything you need to begin your modeling career</p>
+                        <a href="#contact" class="btn-secondary">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="footer-social">
-                        <h3>Follow Us</h3>
-                        <div class="social-icons">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+
+            <div class="gallery-tabs">
+                <button class="tab-btn active" data-tab="photoshoots">Photoshoots</button>
+                <button class="tab-btn" data-tab="runway">Runway</button>
+            </div>
+
+            <div class="gallery-content">
+                <div class="gallery-grid active" id="photoshoots">
+                    <div class="gallery-item"><img src="img/1.png" alt="Photoshoot"></div>
+                    <div class="gallery-item"><img src="img/2.png" alt="Photoshoot"></div>
+                    <div class="gallery-item"><img src="img/5.png" alt="Photoshoot"></div>
+                    <div class="gallery-item"><img src="img/6.png" alt="Photoshoot"></div>
+                    <div class="gallery-item"><img src="img/8.png" alt="Photoshoot"></div>
+                    <div class="gallery-item"><img src="img/9.png" alt="Photoshoot"></div>
+                </div>
+
+                <div class="gallery-grid" id="runway">
+                    <div class="gallery-item"><img src="img/3.png" alt="Runway"></div>
+                    <div class="gallery-item"><img src="img/4.png" alt="Runway"></div>
+                    <div class="gallery-item"><img src="img/7.png" alt="Runway"></div>
+                    <div class="gallery-item"><img src="img/10.png" alt="Runway"></div>
+                    <div class="gallery-item"><img src="img/11.png" alt="Runway"></div>
+                    <div class="gallery-item"><img src="img/12.png" alt="Runway"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnerships Section -->
+    <section id="partnerships" class="partnerships-section">
+        <div class="container">
+            <h2 class="section-title">Our Partnerships</h2>
+            <p class="partnerships-intro">We collaborate with leading brands and businesses to provide the best
+                opportunities for our talent.</p>
+
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>4Wheels Mahikeng</h3>
+                    <p>Transportation partner providing reliable services for our events and models.</p>
+                </div>
+
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <h3>Nando's Mahikeng</h3>
+                    <p>Official catering partner for TMA events and fashion shows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Fashion Avenue<br>Mahikeng, North West<br>South Africa, 2745</p>
                         </div>
                     </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+27 11 123 4567</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@tma.co.za</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Hours</h4>
+                            <p>Mon-Fri: 9AM - 5PM<br>Sat: 10AM - 2PM</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
 
-                <div class="footer-map">
+                <div class="contact-map">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.041620018107!2d25.57738331502904!3d-25.85298398344151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMafikeng%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1630000000000!5m2!1sen!2sza"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.041620018107!2d25.57738331502904!3d-25.85298398344151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMahikeng%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1630000000000!5m2!1sen!2sza"
                         allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="copyright">
-                &copy; 2023 Taahirah Modelling Agency. All Rights Reserved. |
-                Designed by MapsMediaProductions
-            </div>
-        </footer>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Taahirah Modelling Agency. All Rights Reserved.</p>
+            <p>Designed by MapsMediaProductions</p>
+        </div>
+    </footer>
 
-    </body>
+    <script src="main.js"></script>
+</body>
 
 </html>
