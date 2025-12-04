@@ -86,19 +86,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const galleryGrids = document.querySelectorAll('.gallery-grid');
 
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const tabName = this.getAttribute('data-tab');
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const tabName = this.getAttribute('data-tab');
 
-            // Remove active class from all tabs and grids
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            galleryGrids.forEach(grid => grid.classList.remove('active'));
+                // Remove active class from all tabs and grids
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                galleryGrids.forEach(grid => grid.classList.remove('active'));
 
-            // Add active class to clicked tab and corresponding grid
-            this.classList.add('active');
-            document.getElementById(tabName).classList.add('active');
+                // Add active class to clicked tab and corresponding grid
+                this.classList.add('active');
+                const targetGrid = document.getElementById(tabName);
+                if (targetGrid) {
+                    targetGrid.classList.add('active');
+                }
+            });
         });
-    });
+    }
 
     // Scroll animations
     const observerOptions = {

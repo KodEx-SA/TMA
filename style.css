@@ -526,8 +526,12 @@ section {
   object-fit: cover;
 }
 
-.winner-card h4 {
+.winner-info {
   padding: 20px;
+  text-align: center;
+}
+
+.winner-card h4 {
   font-size: 1.3rem;
   font-weight: 600;
 }
@@ -715,6 +719,41 @@ section {
 .partner-card p {
   color: #333333;
   line-height: 1.7;
+}
+
+.partnership-gallery {
+  margin-top: 60px;
+}
+
+.partnership-gallery h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.partnership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.partnership-item {
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s ease;
+}
+
+.partnership-item:hover {
+  transform: scale(1.05);
+}
+
+.partnership-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
 }
 
 /* Contact Section */
