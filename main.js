@@ -1,196 +1,239 @@
-'use strict'
+'use strict';
+
 document.addEventListener('DOMContentLoaded', function () {
-    const loaderContainer = document.querySelector('.loader-container');
-    const loaderLogo = document.querySelector('.loader-logo');
-    const doorLeft = document.querySelector('.door-left');
-    const doorRight = document.querySelector('.door-right');
-    const heroSection = document.querySelector('.hero');
+    // Mobile Navigation Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
 
-    // Minimum loader display time (1.2 seconds)
-    const minLoaderTime = 1200;
-    const startTime = Date.now();
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function () {
+            navMenu.classList.toggle('active');
 
-    // Start the loader animation sequence
-    setTimeout(() => {
-        // Add class to open doors
-        loaderContainer.classList.add('doors-open');
-
-        // Fade out logo
-        loaderLogo.classList.add('fade-out');
-
-        // After doors have opened, hide loader and show hero
-        setTimeout(() => {
-            loaderContainer.style.display = 'none';
-            heroSection.style.display = 'block';
-        }, 1000); // Match this with the door transition duration
-    }, Math.max(0, minLoaderTime - (Date.now() - startTime)));
-});
-
-// Masonry Carousel Effect
-const masonryGrid = document.querySelector('.masonry-grid');
-let position = 0;
-const speed = 0.05; // Adjust speed here (lower = slower)
-let isAnimating = true;
-
-function animateMasonry() {
-    if (!isAnimating) return;
-
-    position -= speed;
-
-    // Reset position when it goes too far
-    if (position < -66.66) {
-        position = 0;
+            // Animate hamburger icon
+            const spans = menuToggle.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(7px, 7px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
     }
 
-    masonryGrid.style.transform = `translateX(${position}%)`;
-    requestAnimationFrame(animateMasonry);
-}
-
-// Start animation after loader is gone
-setTimeout(() => {
-    animateMasonry();
-}, 3000);
-
-// Pause animation on hover (desktop only)
-if (window.innerWidth > 768) {
-    masonryGrid.addEventListener('mouseenter', () => {
-        isAnimating = false;
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            if (window.innerWidth <= 768) {
+                navMenu.classList.remove('active');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
     });
 
-    masonryGrid.addEventListener('mouseleave', () => {
-        isAnimating = true;
-    });
-}
+    // Smooth scroll with offset for fixed navbar
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
 
-// Modal opening and closing functionality for model information
-const modelCards = document.querySelectorAll('.model-card');
-const modelModal = document.querySelector('.model-modal');
-const closeModalBtn = document.querySelector('.close-modal');
-const modalImg = document.querySelector('.modal-img');
-const modalName = document.querySelector('.modal-name');
-const modalBio = document.querySelector('.modal-bio');
+            if (targetId === '#') return;
 
-let modelData = {};
+            const target = document.querySelector(targetId);
+            if (target) {
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight;
 
-// Fetch model data from external JSON file
-fetch('models.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to load models data');
-        }
-        return response.json();
-    })
-    .then(data => {
-        modelData = data.reduce((acc, model) => {
-            acc[model.id] = model;
-            return acc;
-        }, {});
-    })
-    .catch(error => {
-        console.error('Error loading models:', error);
-        showToast('Failed to load model information. Please refresh the page.');
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 
-modelCards.forEach(card => {
-    card.addEventListener('click', () => {
-        const modelId = parseInt(card.dataset.model);
-        const data = modelData[modelId];
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
 
-        if (data) {
-            modalImg.src = card.querySelector('img').src;
-            modalImg.alt = `${data.name} profile photo`;
-            modalName.textContent = data.name;
-            modalBio.textContent = data.bio;
+    function updateActiveNav() {
+        const scrollY = window.pageYOffset;
 
-            // Fixed: Use correct selectors for stat items
-            document.querySelector('.stat-height').textContent = data.height;
-            document.querySelector('.stat-measurements').textContent = data.measurements;
-            document.querySelector('.stat-shoes').textContent = data.shoeSize;
-            document.querySelector('.stat-hair-eyes').textContent = data.hairEyes;
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
 
-            modelModal.classList.add('active');
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
 
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
+    window.addEventListener('scroll', updateActiveNav);
+
+    // Gallery Tabs
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const galleryGrids = document.querySelectorAll('.gallery-grid');
+
+    if (tabButtons.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const tabName = this.getAttribute('data-tab');
+
+                // Remove active class from all tabs and grids
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                galleryGrids.forEach(grid => grid.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding grid
+                this.classList.add('active');
+                const targetGrid = document.getElementById(tabName);
+                if (targetGrid) {
+                    targetGrid.classList.add('active');
+                }
+            });
+        });
+    }
+
+    // Scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll('.about-card, .programme-card, .category-item, .benefit-item, .winner-card, .shop-category, .gallery-item, .partner-card');
+
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+    // Navbar background on scroll
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
         } else {
-            showToast('Model information not available.');
+            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
         }
     });
-});
 
-function closeModal() {
-    modelModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-closeModalBtn.addEventListener('click', closeModal);
-
-// Close modal when clicking outside content
-modelModal.addEventListener('click', (e) => {
-    if (e.target === modelModal) {
-        closeModal();
+    // Form validation (if you add forms later)
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
     }
-});
 
-// Close modal on Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modelModal.classList.contains('active')) {
-        closeModal();
+    // Toast notification function
+    function showToast(message, duration = 3000) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #000;
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        `;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+        }, 100);
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
     }
-});
 
-// Toast notification function
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
+    // Lazy load images
+    const images = document.querySelectorAll('img[loading="lazy"]');
 
-    // Trigger reflow to enable transition
-    toast.offsetHeight;
-    toast.classList.add('show');
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src || img.src;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
 
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
+        images.forEach(img => imageObserver.observe(img));
+    }
 
-// Add intersection observer for animations
-const observerElements = document.querySelectorAll('.about-content, .models-container, .footer-container');
-
-const contentObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            contentObserver.unobserve(entry.target);
-        }
+    // Handle image load errors
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function () {
+            console.log('Image failed to load:', this.src);
+        });
     });
-}, { threshold: 0.1 });
 
-observerElements.forEach(el => {
-    if (el) contentObserver.observe(el);
-});
+    // Prevent right-click on images (optional - for protecting photos)
+    document.querySelectorAll('.gallery-item img, .winner-card img, .programme-card img').forEach(img => {
+        img.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            showToast('Image download is disabled');
+        });
+    });
 
-// Handle responsive behavior
-function handleResize() {
-    // Re-enable hover pause when resizing to desktop
-    if (window.innerWidth > 768) {
-        masonryGrid.removeEventListener('mouseenter', pauseAnimation);
-        masonryGrid.removeEventListener('mouseleave', resumeAnimation);
-        masonryGrid.addEventListener('mouseenter', pauseAnimation);
-        masonryGrid.addEventListener('mouseleave', resumeAnimation);
+    // Performance: Debounce scroll events
+    function debounce(func, wait = 10) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
-}
 
-function pauseAnimation() {
-    isAnimating = false;
-}
+    const debouncedScroll = debounce(() => {
+        updateActiveNav();
+    }, 10);
 
-function resumeAnimation() {
-    isAnimating = true;
-    animateMasonry();
-}
+    window.addEventListener('scroll', debouncedScroll);
 
-window.addEventListener('resize', handleResize);
-handleResize();
+    // Console welcome message
+    console.log('%cTMA - Taahirah Modelling Agency', 'font-size: 20px; font-weight: bold; color: #000;');
+    console.log('%cWebsite designed by MapsMediaProductions', 'font-size: 12px; color: #666;');
+});
