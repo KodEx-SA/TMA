@@ -232,8 +232,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 10);
 
     window.addEventListener('scroll', debouncedScroll);
-
-    // Console welcome message
-    console.log('%cTMA - Taahirah Modelling Agency', 'font-size: 20px; font-weight: bold; color: #000;');
-    console.log('%cWebsite designed by MapsMediaProductions', 'font-size: 12px; color: #666;');
 });
