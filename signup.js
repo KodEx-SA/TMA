@@ -1,212 +1,263 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Loader Animation
-    const loaderContainer = document.querySelector('.loader-container');
-    const loaderLogo = document.querySelector('.loader-logo');
-    const signupSection = document.querySelector('.signup');
-    const signupContainer = document.querySelector('.signup-container');
-    const minLoaderTime = 1500;
-    const startTime = Date.now();
+    const form = document.getElementById('signupForm');
+    const submitBtn = form.querySelector('.btn-submit');
 
-    setTimeout(() => {
-        loaderContainer.classList.add('doors-open');
-        loaderLogo.classList.add('fade-out');
-        setTimeout(() => {
-            loaderContainer.style.display = 'none';
-            signupSection.style.display = 'flex';
-            signupContainer.classList.add('visible');
-        }, 1200);
-    }, Math.max(0, minLoaderTime - (Date.now() - startTime)));
+    // Form validation
+    const validators = {
+        firstName: (value) => value.trim().length >= 2,
+        lastName: (value) => value.trim().length >= 2,
+        email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        phone: (value) => /^[+]?[\d\s()-]{10,}$/.test(value),
+        dateOfBirth: (value) => { // validate age between 5 and 100
+            if (!value) return false;
+            const age = calculateAge(value);
+            return age >= 5 && age <= 100;
+        },
+        gender: (value) => value !== '',
+        city: (value) => value.trim().length >= 2,
+        province: (value) => value !== '',
+        category: (value) => value !== '',
+        experience: (value) => value !== '',
+        height: (value) => { // validate height between 120 and 250 cm
+            const h = parseInt(value);
+            return h >= 120 && h <= 250;
+        },
+        password: (value) => value.length >= 8,
+        confirmPassword: (value) => value === form.password.value,
+        terms: (checked) => checked === true
+    };
 
-    // Password Toggle for both password fields
-    const togglePasswordBtns = document.querySelectorAll('.toggle-password');
+    // Calculate age from date of birth
+    function calculateAge(birthDate) {
+        const today = new Date(); // Current date
+        const birth = new Date(birthDate); // Birth date
+        let age = today.getFullYear() - birth.getFullYear(); // Initial age calculation
+        const monthDiff = today.getMonth() - birth.getMonth(); // Month difference
 
-    togglePasswordBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const targetId = this.dataset.target;
-            const passwordInput = document.getElementById(targetId);
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
-
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        });
-    });
-
-    // Password Strength Indicator
-    const passwordInput = document.getElementById('password');
-    const strengthContainer = document.querySelector('.password-strength');
-    const strengthBar = document.querySelector('.strength-bar');
-    const strengthText = document.querySelector('.strength-text');
-
-    passwordInput.addEventListener('input', function () {
-        const password = this.value;
-
-        if (password.length === 0) {
-            strengthContainer.classList.remove('visible');
-            return;
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) { // Adjust if birthday hasn't occurred yet this year
+            age--;
         }
 
-        strengthContainer.classList.add('visible');
-        const strength = calculatePasswordStrength(password);
-
-        strengthBar.className = 'strength-bar';
-
-        if (strength.score < 3) {
-            strengthBar.classList.add('weak');
-            strengthText.textContent = 'Weak password';
-            strengthText.style.color = '#ff6b6b';
-        } else if (strength.score < 5) {
-            strengthBar.classList.add('medium');
-            strengthText.textContent = 'Medium password';
-            strengthText.style.color = '#ffa500';
-        } else {
-            strengthBar.classList.add('strong');
-            strengthText.textContent = 'Strong password';
-            strengthText.style.color = '#51cf66';
-        }
-    });
-
-    function calculatePasswordStrength(password) {
-        let score = 0;
-
-        if (password.length >= 8) score++;
-        if (password.length >= 12) score++;
-        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
-        if (/\d/.test(password)) score++;
-        if (/[^a-zA-Z0-9]/.test(password)) score++;
-
-        return { score };
+        return age;
     }
 
-    // Form Validation with Enhanced Checks
-    const signupForm = document.getElementById('signup-form');
+    // Real-time validation
+    Object.keys(validators).forEach(fieldName => { // for each field
+        const field = form[fieldName];
+        if (!field) return;
 
-    signupForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+        const eventType = field.type === 'checkbox' ? 'change' : 'blur'; // determine event type
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-        const termsChecked = document.getElementById('terms').checked;
+        field.addEventListener(eventType, function () {
+            validateField(fieldName, field);
+        });
 
-        // Validation checks
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phoneRegex = /^[\d\s+()-]+$/;
-
-        if (!name || !email || !phone || !password || !confirmPassword) {
-            showToast('Please fill in all fields.', 'error');
-            return;
+        // Also validate on input for immediate feedback
+        if (field.type !== 'checkbox') {
+            field.addEventListener('input', function () {
+                if (field.classList.contains('error')) {
+                    validateField(fieldName, field);
+                }
+            });
         }
-
-        if (name.length < 2) {
-            showToast('Please enter your full name.', 'error');
-            return;
-        }
-
-        if (!emailRegex.test(email)) {
-            showToast('Please enter a valid email address.', 'error');
-            return;
-        }
-
-        if (!phoneRegex.test(phone) || phone.replace(/\D/g, '').length < 10) {
-            showToast('Please enter a valid phone number.', 'error');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            showToast('Passwords do not match!', 'error');
-            return;
-        }
-
-        if (password.length < 8) {
-            showToast('Password must be at least 8 characters.', 'error');
-            return;
-        }
-
-        const strength = calculatePasswordStrength(password);
-        if (strength.score < 3) {
-            showToast('Please use a stronger password.', 'error');
-            return;
-        }
-
-        if (!termsChecked) {
-            showToast('Please accept the Terms & Conditions.', 'error');
-            return;
-        }
-
-        // Simulate account creation
-        simulateSignup(name, email, phone);
     });
 
-    // Simulate signup process
-    function simulateSignup(name, email, phone) {
-        const submitBtn = signupForm.querySelector('.btn-signup');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Creating Account...';
+    // Validate individual field
+    function validateField(fieldName, field) {
+        const validator = validators[fieldName];
+        if (!validator) return true;
+
+        const value = field.type === 'checkbox' ? field.checked : field.value;
+        const isValid = validator(value);
+
+        // Remove previous error message
+        const existingError = field.parentElement.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+
+        if (isValid) {
+            field.classList.remove('error');
+            field.classList.add('success');
+            return true;
+        } else {
+            field.classList.remove('success');
+            field.classList.add('error');
+
+            // Add error message
+            const errorMsg = getErrorMessage(fieldName);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = errorMsg;
+            field.parentElement.appendChild(errorDiv);
+
+            return false;
+        }
+    }
+
+    // Get error messages
+    function getErrorMessage(fieldName) {
+        const messages = {
+            firstName: 'First name must be at least 2 characters',
+            lastName: 'Last name must be at least 2 characters',
+            email: 'Please enter a valid email address',
+            phone: 'Please enter a valid phone number',
+            dateOfBirth: 'Please enter a valid date of birth (age 5-100)',
+            gender: 'Please select your gender',
+            city: 'City must be at least 2 characters',
+            province: 'Please select your province',
+            category: 'Please select an interest category',
+            experience: 'Please select your experience level',
+            height: 'Height must be between 120-250 cm',
+            password: 'Password must be at least 8 characters',
+            confirmPassword: 'Passwords do not match',
+            terms: 'You must agree to the terms and conditions'
+        };
+
+        return messages[fieldName] || 'This field is invalid';
+    }
+
+    // Password strength indicator
+    const passwordInput = form.password;
+    passwordInput.addEventListener('input', function () { // on password input
+        const strength = checkPasswordStrength(this.value); // check strength
+        updatePasswordStrength(strength);
+    });
+
+    function checkPasswordStrength(password) {
+        let strength = 0;
+
+        if (password.length >= 8) strength++;
+        if (password.length >= 12) strength++;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+        if (/\d/.test(password)) strength++;
+        if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+        return strength;
+    }
+
+    function updatePasswordStrength(strength) {
+        const strengthText = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+        const small = passwordInput.parentElement.querySelector('small');
+
+        if (strength > 0) {
+            small.textContent = `Password Strength: ${strengthText[strength - 1]}`; // update text
+            small.style.color = strength >= 3 ? '#2e7d32' : strength >= 2 ? '#f57c00' : '#d32f2f'; // color code
+        } else {
+            small.textContent = 'Must be at least 8 characters';
+            small.style.color = '#666666';
+        }
+    }
+
+    // Confirm password matching
+    const confirmPasswordInput = form.confirmPassword;
+    confirmPasswordInput.addEventListener('input', function () {
+        if (this.value) {
+            validateField('confirmPassword', this);
+        }
+    });
+
+    // Form submission
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Validate all fields
+        let isValid = true;
+        Object.keys(validators).forEach(fieldName => {
+            const field = form[fieldName];
+            if (field && !validateField(fieldName, field)) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            showToast('Please fill in all required fields correctly', 'error');
+
+            // Scroll to first error
+            const firstError = form.querySelector('.error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.focus();
+            }
+            return;
+        }
+
+        // Show loading state
         submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
 
-        // Simulate API delay
+        // Collect form data
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+            if (key === 'terms' || key === 'newsletter') {
+                data[key] = form[key].checked;
+            } else {
+                data[key] = value;
+            }
+        });
+
+        // Simulate API call
         setTimeout(() => {
-            showToast('Account created successfully! Welcome to TMA.', 'success');
+            console.log('Form submitted:', data);
 
-            // Reset button
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            // Success
+            showToast('Account created successfully! Redirecting...', 'success');
 
-            // Reset form
-            signupForm.reset();
-            strengthContainer.classList.remove('visible');
-
-            // Redirect to login page
+            // Redirect after 2 seconds
             setTimeout(() => {
                 window.location.href = 'login.html';
             }, 2000);
         }, 1500);
-    }
-
-    // Social Signup Buttons
-    const googleBtn = document.querySelector('.btn-google');
-    const facebookBtn = document.querySelector('.btn-facebook');
-
-    googleBtn.addEventListener('click', function () {
-        showToast('Google signup coming soon!', 'info');
-        // Implement Google OAuth here
     });
 
-    facebookBtn.addEventListener('click', function () {
-        showToast('Facebook signup coming soon!', 'info');
-        // Implement Facebook OAuth here
-    });
-
-    // Terms & Conditions Link
-    const termsLinks = document.querySelectorAll('.terms-link');
-    termsLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            showToast('Terms & Conditions page coming soon!', 'info');
-            // Link to actual terms page when available
-        });
-    });
-
-    // Toast notification function
-    function showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
+    // Toast notification
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
         toast.textContent = message;
-        document.body.appendChild(toast);
+        toast.className = `toast ${type}`;
 
-        // Trigger reflow to enable transition
-        toast.offsetHeight;
-        toast.classList.add('show');
+        setTimeout(() => toast.classList.add('show'), 100);
 
         setTimeout(() => {
             toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
+        }, 4000);
     }
+
+    // Age warning for date of birth
+    const dobInput = form.dateOfBirth;
+    dobInput.addEventListener('change', function () {
+        const age = calculateAge(this.value);
+
+        if (age < 18 && age >= 5) {
+            showToast('Applicants under 18 require parental consent', 'error');
+        }
+    });
+
+    // Phone number formatting
+    const phoneInput = form.phone;
+    phoneInput.addEventListener('input', function () {
+        // Auto-add +27 for SA numbers if not present
+        if (this.value && !this.value.startsWith('+')) {
+            if (this.value.startsWith('0')) {
+                this.value = '+27 ' + this.value.substring(1);
+            }
+        }
+    });
+
+    // Prevent form submission on Enter key (except on submit button)
+    form.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter' && e.target.type !== 'submit') {
+            e.preventDefault();
+
+            // Move to next input
+            const inputs = Array.from(form.querySelectorAll('input, select'));
+            const index = inputs.indexOf(e.target);
+            if (index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        }
+    });
 });

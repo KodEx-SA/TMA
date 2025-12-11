@@ -1,155 +1,224 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Loader Animation
-    const loaderContainer = document.querySelector('.loader-container');
-    const loaderLogo = document.querySelector('.loader-logo');
-    const loginSection = document.querySelector('.login');
-    const loginContainer = document.querySelector('.login-container');
-    const minLoaderTime = 1500;
-    const startTime = Date.now();
-
-    setTimeout(() => {
-        loaderContainer.classList.add('doors-open');
-        loaderLogo.classList.add('fade-out');
-        setTimeout(() => {
-            loaderContainer.style.display = 'none';
-            loginSection.style.display = 'flex';
-            loginContainer.classList.add('visible');
-        }, 1200);
-    }, Math.max(0, minLoaderTime - (Date.now() - startTime)));
-
-    // Password Toggle
+    const loginForm = document.getElementById('loginForm');
+    const forgotPasswordLink = document.querySelector('.forgot-password');
+    const forgotModal = document.getElementById('forgotModal');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const forgotForm = document.getElementById('forgotForm');
     const togglePasswordBtn = document.querySelector('.toggle-password');
     const passwordInput = document.getElementById('password');
 
+    // Toggle password visibility
     togglePasswordBtn.addEventListener('click', function () {
         const type = passwordInput.type === 'password' ? 'text' : 'password';
         passwordInput.type = type;
 
         const icon = this.querySelector('i');
-        icon.classList.toggle('fa-eye');
-        icon.classList.toggle('fa-eye-slash');
+        if (type === 'password') {
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
     });
 
-    // Form Validation
-    const loginForm = document.getElementById('login-form');
+    // Email validation
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // Real-time validation
+    const emailInput = document.getElementById('email');
+
+    emailInput.addEventListener('blur', function () {
+        if (this.value && !validateEmail(this.value)) {
+            this.classList.add('error');
+            this.classList.remove('success');
+        } else if (this.value) {
+            this.classList.remove('error');
+            this.classList.add('success');
+        }
+    });
+
+    emailInput.addEventListener('input', function () {
+        if (this.classList.contains('error')) {
+            if (validateEmail(this.value)) {
+                this.classList.remove('error');
+                this.classList.add('success');
+            }
+        }
+    });
+
+    passwordInput.addEventListener('input', function () {
+        if (this.value.length >= 8) {
+            this.classList.remove('error');
+            this.classList.add('success');
+        } else if (this.classList.contains('error')) {
+            if (this.value.length >= 8) {
+                this.classList.remove('error');
+            }
+        }
+    });
+
+    // Login form submission
     loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-        const rememberMe = document.getElementById('remember').checked;
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+        const remember = document.getElementById('remember').checked;
 
-        // Email regex validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Validation
+        let isValid = true;
 
-        if (!email || !password) {
-            showToast('Please fill in all fields.', 'error');
+        if (!validateEmail(email)) {
+            emailInput.classList.add('error');
+            isValid = false;
+        }
+
+        if (password.length < 8) {
+            passwordInput.classList.add('error');
+            isValid = false;
+        }
+
+        if (!isValid) {
+            showToast('Please enter valid credentials', 'error');
             return;
         }
 
-        if (!emailRegex.test(email)) {
-            showToast('Please enter a valid email address.', 'error');
-            return;
-        }
-
-        if (password.length < 6) {
-            showToast('Password must be at least 6 characters.', 'error');
-            return;
-        }
-
-        // Simulate login process
-        // In production, this would be an API call to your backend
-        simulateLogin(email, password, rememberMe);
-    });
-
-    // Simulate login (replace with actual authentication)
-    function simulateLogin(email, password, rememberMe) {
         // Show loading state
-        const submitBtn = loginForm.querySelector('.btn-login');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Logging in...';
+        const submitBtn = loginForm.querySelector('.btn-submit');
         submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
 
-        // Simulate API delay
+        // Simulate API call
         setTimeout(() => {
-            // For demo purposes, accept any valid credentials
-            // In production, verify against your backend
-            if (rememberMe) {
-                localStorage.setItem('rememberedEmail', email);
+            // For demo purposes - in production, validate against backend
+            console.log('Login attempt:', { email, password, remember });
+
+            // Success scenario
+            showToast('Login successful! Redirecting...', 'success');
+
+            // Save remember me preference
+            if (remember) {
+                localStorage.setItem('tma_remember', email);
             }
 
-            showToast('Login successful! Welcome back.', 'success');
-
-            // Reset button
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-
-            // Redirect to homepage after successful login
+            // Redirect to dashboard (or index for now)
             setTimeout(() => {
                 window.location.href = 'index.html';
-            }, 1500);
-        }, 1500);
-    }
+            }, 2000);
 
-    // Social Login Buttons
+        }, 1500);
+    });
+
+    // Forgot password modal
+    forgotPasswordLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        forgotModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeModalBtn.addEventListener('click', function () {
+        forgotModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    // Close modal on outside click
+    forgotModal.addEventListener('click', function (e) {
+        if (e.target === forgotModal) {
+            forgotModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && forgotModal.classList.contains('active')) {
+            forgotModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Forgot password form submission
+    forgotForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const resetEmail = document.getElementById('resetEmail').value.trim();
+
+        if (!validateEmail(resetEmail)) {
+            showToast('Please enter a valid email address', 'error');
+            return;
+        }
+
+        const submitBtn = this.querySelector('.btn-submit');
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+
+        // Simulate API call
+        setTimeout(() => {
+            console.log('Password reset requested for:', resetEmail);
+
+            showToast('Password reset link sent to your email', 'success');
+
+            // Close modal and reset form
+            setTimeout(() => {
+                forgotModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                forgotForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+            }, 2000);
+
+        }, 1500);
+    });
+
+    // Social login buttons
     const googleBtn = document.querySelector('.btn-google');
     const facebookBtn = document.querySelector('.btn-facebook');
 
     googleBtn.addEventListener('click', function () {
-        showToast('Google login coming soon!', 'info');
-        // Implement Google OAuth here
+        showToast('Google login - Coming soon!', 'error');
+        // In production, implement OAuth flow
+        console.log('Google login clicked');
     });
 
     facebookBtn.addEventListener('click', function () {
-        showToast('Facebook login coming soon!', 'info');
-        // Implement Facebook OAuth here
+        showToast('Facebook login - Coming soon!', 'error');
+        // In production, implement OAuth flow
+        console.log('Facebook login clicked');
     });
 
-    // Forgot Password
-    const forgotPasswordLink = document.querySelector('.forgot-password');
-    forgotPasswordLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value.trim();
-
-        if (!email) {
-            showToast('Please enter your email address first.', 'error');
-            document.getElementById('email').focus();
-            return;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            showToast('Please enter a valid email address.', 'error');
-            return;
-        }
-
-        // Simulate password reset
-        showToast(`Password reset link sent to ${email}`, 'success');
-    });
-
-    // Pre-fill email if remembered
-    const rememberedEmail = localStorage.getItem('rememberedEmail');
-    if (rememberedEmail) {
-        document.getElementById('email').value = rememberedEmail;
-        document.getElementById('remember').checked = true;
-    }
-
-    // Toast notification function
-    function showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
+    // Toast notification
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
         toast.textContent = message;
-        document.body.appendChild(toast);
+        toast.className = `toast ${type}`;
 
-        // Trigger reflow to enable transition
-        toast.offsetHeight;
-        toast.classList.add('show');
+        setTimeout(() => toast.classList.add('show'), 100);
 
         setTimeout(() => {
             toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
+        }, 4000);
     }
+
+    // Check for remembered email
+    const rememberedEmail = localStorage.getItem('tma_remember');
+    if (rememberedEmail) {
+        emailInput.value = rememberedEmail;
+        document.getElementById('remember').checked = true;
+    }
+
+    // Auto-focus on email field
+    emailInput.focus();
+
+    // Handle Enter key to move between fields
+    emailInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            passwordInput.focus();
+        }
+    });
 });
