@@ -1,122 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Sign up for Taahirah Modelling Agency, South Africa's premier modeling platform, to launch your career in fashion, runway, and commercial modeling.">
-    <meta name="keywords" content="modeling agency, sign up, South Africa, fashion, Taahirah Zungu">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="description" content="Join Taahirah Modelling Agency - Sign up to start your modeling career journey">
+    <title>Sign Up - TMA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="signup.css">
-    <script src="signup.js" defer></script>
-    <title>TMA - Sign Up</title>
 </head>
-
 <body>
-    <!-- Loader Section -->
-    <div class="loader-container">
-        <div class="loader-logo">FASHION</div>
-        <div class="door door-left"></div>
-        <div class="door door-right"></div>
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <div class="signup-container">
+        <!-- Left Side - Branding -->
+        <div class="signup-left">
+            <div class="brand-content">
+                <h1>TMA</h1>
+                <p class="tagline">Taahirah Modelling Agency</p>
+                <p class="description">Start your journey with South Africa's premier modelling agency. Join hundreds of successful models who have launched their careers with us.</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Professional Training</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Career Development</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Industry Connections</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Portfolio Building</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Form -->
+        <div class="signup-right">
+            <div class="form-container">
+                <h2>Create Your Account</h2>
+                <p class="form-subtitle">Already have an account? <a href="login.html">Sign in</a></p>
+
+                <form id="signupForm" class="signup-form">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+27" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth *</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender *</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select...</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="non-binary">Non-Binary</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-section">
+                        <h3>Location</h3>
+                        
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="province">Province *</label>
+                                <select id="province" name="province" required>
+                                    <option value="">Select Province...</option>
+                                    <option value="gauteng">Gauteng</option>
+                                    <option value="western-cape">Western Cape</option>
+                                    <option value="kwazulu-natal">KwaZulu-Natal</option>
+                                    <option value="eastern-cape">Eastern Cape</option>
+                                    <option value="north-west">North West</option>
+                                    <option value="free-state">Free State</option>
+                                    <option value="limpopo">Limpopo</option>
+                                    <option value="mpumalanga">Mpumalanga</option>
+                                    <option value="northern-cape">Northern Cape</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country *</label>
+                                <input type="text" id="country" name="country" value="South Africa" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modeling Information -->
+                    <div class="form-section">
+                        <h3>Modeling Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="category">Interest Category *</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select Category...</option>
+                                <option value="fashion">Fashion Models</option>
+                                <option value="commercial">Commercial Models</option>
+                                <option value="runway">Runway Models</option>
+                                <option value="editorial">Editorial Models</option>
+                                <option value="child">Child Models</option>
+                                <option value="plus-size">Plus Size Models</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Experience Level *</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Select Level...</option>
+                                <option value="beginner">Beginner (No Experience)</option>
+                                <option value="intermediate">Intermediate (1-2 years)</option>
+                                <option value="experienced">Experienced (3+ years)</option>
+                                <option value="professional">Professional</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="height">Height (cm) *</label>
+                                <input type="number" id="height" name="height" placeholder="e.g. 175" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="weight">Weight (kg)</label>
+                                <input type="number" id="weight" name="weight" placeholder="Optional">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Security -->
+                    <div class="form-section">
+                        <h3>Account Security</h3>
+                        
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" name="password" required>
+                            <small>Must be at least 8 characters</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span>I agree to the <a href="#" target="_blank">Terms and Conditions</a> and <a href="#" target="_blank">Privacy Policy</a></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span>Send me updates about new opportunities and agency news</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-submit">Create Account</button>
+
+                    <p class="form-footer">
+                        By signing up, you agree to receive communications from TMA about modeling opportunities and updates.
+                    </p>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <!-- Signup Section -->
-    <section class="signup">
-        <div class="signup-container">
-            <div class="signup-header">
-                <i class="fas fa-user-plus"></i>
-                <h2>Join Taahirah Modelling Agency</h2>
-                <p class="signup-subtitle">Start your journey to a successful modeling career with us.</p>
-            </div>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
 
-            <form id="signup-form" class="signup-form">
-                <div class="form-group">
-                    <label for="name">
-                        <i class="fas fa-user"></i> Full Name
-                    </label>
-                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">
-                        <i class="fas fa-envelope"></i> Email Address
-                    </label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">
-                        <i class="fas fa-phone"></i> Phone Number
-                    </label>
-                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">
-                        <i class="fas fa-lock"></i> Password
-                    </label>
-                    <div class="password-container">
-                        <input type="password" id="password" name="password" placeholder="Create a password" required>
-                        <button type="button" class="toggle-password" data-target="password"
-                            aria-label="Toggle password visibility">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    <div class="password-strength">
-                        <div class="strength-bar"></div>
-                        <span class="strength-text"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirm-password">
-                        <i class="fas fa-check-circle"></i> Confirm Password
-                    </label>
-                    <div class="password-container">
-                        <input type="password" id="confirm-password" name="confirm-password"
-                            placeholder="Confirm your password" required>
-                        <button type="button" class="toggle-password" data-target="confirm-password"
-                            aria-label="Toggle confirm password visibility">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <span>I agree to the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#"
-                                class="terms-link">Privacy Policy</a></span>
-                    </label>
-                </div>
-
-                <button type="submit" class="btn-signup">Create Account</button>
-            </form>
-
-            <div class="signup-divider">
-                <span>OR</span>
-            </div>
-
-            <div class="social-signup">
-                <button class="btn-social btn-google">
-                    <i class="fab fa-google"></i> Sign up with Google
-                </button>
-                <button class="btn-social btn-facebook">
-                    <i class="fab fa-facebook-f"></i> Sign up with Facebook
-                </button>
-            </div>
-
-            <p class="signup-login">
-                Already have an account? <a href="login.html">Log In</a>
-            </p>
-
-            <a href="index.html" class="back-home">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </a>
-        </div>
-    </section>
-
+    <script src="signup.js"></script>
 </body>
-
 </html>
