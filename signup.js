@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         lastName: (value) => value.trim().length >= 2,
         email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
         phone: (value) => /^[+]?[\d\s()-]{10,}$/.test(value),
-        dateOfBirth: (value) => {
+        dateOfBirth: (value) => { // validate age between 5 and 100
             if (!value) return false;
             const age = calculateAge(value);
             return age >= 5 && age <= 100;
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         province: (value) => value !== '',
         category: (value) => value !== '',
         experience: (value) => value !== '',
-        height: (value) => {
+        height: (value) => { // validate height between 120 and 250 cm
             const h = parseInt(value);
             return h >= 120 && h <= 250;
         },
@@ -31,12 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Calculate age from date of birth
     function calculateAge(birthDate) {
-        const today = new Date();
-        const birth = new Date(birthDate);
-        let age = today.getFullYear() - birth.getFullYear();
-        const monthDiff = today.getMonth() - birth.getMonth();
+        const today = new Date(); // Current date
+        const birth = new Date(birthDate); // Birth date
+        let age = today.getFullYear() - birth.getFullYear(); // Initial age calculation
+        const monthDiff = today.getMonth() - birth.getMonth(); // Month difference
 
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) { // Adjust if birthday hasn't occurred yet this year
             age--;
         }
 
@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Real-time validation
-    Object.keys(validators).forEach(fieldName => {
+    Object.keys(validators).forEach(fieldName => { // for each field
         const field = form[fieldName];
         if (!field) return;
 
-        const eventType = field.type === 'checkbox' ? 'change' : 'blur';
+        const eventType = field.type === 'checkbox' ? 'change' : 'blur'; // determine event type
 
         field.addEventListener(eventType, function () {
             validateField(fieldName, field);
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Password strength indicator
     const passwordInput = form.password;
-    passwordInput.addEventListener('input', function () {
-        const strength = checkPasswordStrength(this.value);
+    passwordInput.addEventListener('input', function () { // on password input
+        const strength = checkPasswordStrength(this.value); // check strength
         updatePasswordStrength(strength);
     });
 
@@ -143,8 +143,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const small = passwordInput.parentElement.querySelector('small');
 
         if (strength > 0) {
-            small.textContent = `Password Strength: ${strengthText[strength - 1]}`;
-            small.style.color = strength >= 3 ? '#2e7d32' : strength >= 2 ? '#f57c00' : '#d32f2f';
+            small.textContent = `Password Strength: ${strengthText[strength - 1]}`; // update text
+            small.style.color = strength >= 3 ? '#2e7d32' : strength >= 2 ? '#f57c00' : '#d32f2f'; // color code
         } else {
             small.textContent = 'Must be at least 8 characters';
             small.style.color = '#666666';
